@@ -1,0 +1,1504 @@
+{
+  "Granite Series": [
+    {
+      "id": "gra_1",
+      "name": "Alaska White",
+      "category": "Granite",
+      "image": "/images/products/alaska_white.jpg",
+      "page": 4
+    },
+    {
+      "id": "gra_2",
+      "name": "Alaska Gold",
+      "category": "Granite",
+      "image": "/images/products/alaska_gold.jpg",
+      "page": 4
+    },
+    {
+      "id": "gra_3",
+      "name": "Alaska Pink",
+      "category": "Granite",
+      "image": "/images/products/alaska_pink.jpg",
+      "page": 4
+    },
+    {
+      "id": "gra_4",
+      "name": "Viscon White",
+      "category": "Granite",
+      "image": "/images/products/viscon_white.jpg",
+      "page": 4
+    },
+    {
+      "id": "gra_5",
+      "name": "Black Galaxy",
+      "category": "Granite",
+      "image": "/images/products/black_galaxy.jpg",
+      "page": 4
+    },
+    {
+      "id": "gra_6",
+      "name": "Tan Brown",
+      "category": "Granite",
+      "image": "/images/products/tan_brown.jpg",
+      "page": 4
+    },
+    {
+      "id": "gra_7",
+      "name": "Black Marcino",
+      "category": "Granite",
+      "image": "/images/products/black_marcino.jpg",
+      "page": 4
+    },
+    {
+      "id": "gra_8",
+      "name": "Colonial Gold",
+      "category": "Granite",
+      "image": "/images/products/colonial_gold.jpg",
+      "page": 4
+    },
+    {
+      "id": "gra_9",
+      "name": "P White",
+      "category": "Granite",
+      "image": "/images/products/p_white.jpg",
+      "page": 4
+    },
+    {
+      "id": "gra_10",
+      "name": "Blue Dunes",
+      "category": "Granite",
+      "image": "/images/products/blue_dunes.jpg",
+      "page": 4
+    },
+    {
+      "id": "gra_11",
+      "name": "Imperial Red",
+      "category": "Granite",
+      "image": "/images/products/imperial_red.jpg",
+      "page": 4
+    },
+    {
+      "id": "gra_12",
+      "name": "Rosy Pink",
+      "category": "Granite",
+      "image": "/images/products/rosy_pink.jpg",
+      "page": 4
+    },
+    {
+      "id": "gra_1",
+      "name": "Fantasy Brown",
+      "category": "Granite",
+      "image": "/images/products/fantasy_brown.jpg",
+      "page": 5
+    },
+    {
+      "id": "gra_2",
+      "name": "Jasper Blue",
+      "category": "Granite",
+      "image": "/images/products/jasper_blue.jpg",
+      "page": 5
+    },
+    {
+      "id": "gra_3",
+      "name": "Absolute Black",
+      "category": "Granite",
+      "image": "/images/products/absolute_black.jpg",
+      "page": 5
+    },
+    {
+      "id": "gra_4",
+      "name": "Colonial White",
+      "category": "Granite",
+      "image": "/images/products/colonial_white.jpg",
+      "page": 5
+    },
+    {
+      "id": "gra_5",
+      "name": "Steel Grey",
+      "category": "Granite",
+      "image": "/images/products/steel_grey.jpg",
+      "page": 5
+    },
+    {
+      "id": "gra_6",
+      "name": "Majestic Black",
+      "category": "Granite",
+      "image": "/images/products/majestic_black.jpg",
+      "page": 5
+    },
+    {
+      "id": "gra_7",
+      "name": "Kuppam White",
+      "category": "Granite",
+      "image": "/images/products/kuppam_white.jpg",
+      "page": 5
+    },
+    {
+      "id": "gra_8",
+      "name": "Ivory Gold",
+      "category": "Granite",
+      "image": "/images/products/ivory_gold.jpg",
+      "page": 5
+    },
+    {
+      "id": "gra_9",
+      "name": "Ivory Fantasy",
+      "category": "Granite",
+      "image": "/images/products/ivory_fantasy.jpg",
+      "page": 5
+    },
+    {
+      "id": "gra_10",
+      "name": "Black Forest",
+      "category": "Granite",
+      "image": "/images/products/black_forest.jpg",
+      "page": 5
+    },
+    {
+      "id": "gra_11",
+      "name": "Apple Green",
+      "category": "Granite",
+      "image": "/images/products/apple_green.jpg",
+      "page": 5
+    },
+    {
+      "id": "gra_12",
+      "name": "Sadahalli Grey",
+      "category": "Granite",
+      "image": "/images/products/sadahalli_grey.jpg",
+      "page": 5
+    },
+    {
+      "id": "gra_1",
+      "name": "Red Multi",
+      "category": "Granite",
+      "image": "/images/products/red_multi.jpg",
+      "page": 6
+    },
+    {
+      "id": "gra_2",
+      "name": "Desert Brown",
+      "category": "Granite",
+      "image": "/images/products/desert_brown.jpg",
+      "page": 6
+    },
+    {
+      "id": "gra_3",
+      "name": "Ice White",
+      "category": "Granite",
+      "image": "/images/products/ice_white.jpg",
+      "page": 6
+    },
+    {
+      "id": "gra_4",
+      "name": "Fusion Gold",
+      "category": "Granite",
+      "image": "/images/products/fusion_gold.jpg",
+      "page": 6
+    },
+    {
+      "id": "gra_5",
+      "name": "French White",
+      "category": "Granite",
+      "image": "/images/products/french_white.jpg",
+      "page": 6
+    },
+    {
+      "id": "gra_6",
+      "name": "Tiger Skin",
+      "category": "Granite",
+      "image": "/images/products/tiger_skin.jpg",
+      "page": 6
+    },
+    {
+      "id": "gra_7",
+      "name": "Sira Grey",
+      "category": "Granite",
+      "image": "/images/products/sira_grey.jpg",
+      "page": 6
+    },
+    {
+      "id": "gra_8",
+      "name": "S White",
+      "category": "Granite",
+      "image": "/images/products/s_white.jpg",
+      "page": 6
+    },
+    {
+      "id": "gra_9",
+      "name": "Pebble Black",
+      "category": "Granite",
+      "image": "/images/products/pebble_black.jpg",
+      "page": 6
+    },
+    {
+      "id": "gra_10",
+      "name": "Kashmir White",
+      "category": "Granite",
+      "image": "/images/products/kashmir_white.jpg",
+      "page": 6
+    },
+    {
+      "id": "gra_11",
+      "name": "Indian Juparana",
+      "category": "Granite",
+      "image": "/images/products/indian_juparana.jpg",
+      "page": 6
+    },
+    {
+      "id": "gra_12",
+      "name": "Imperial Gold",
+      "category": "Granite",
+      "image": "/images/products/imperial_gold.jpg",
+      "page": 6
+    },
+    {
+      "id": "gra_1",
+      "name": "Moon White",
+      "category": "Granite",
+      "image": "/images/products/moon_white.jpg",
+      "page": 7
+    },
+    {
+      "id": "gra_2",
+      "name": "Lavender Blue",
+      "category": "Granite",
+      "image": "/images/products/lavender_blue.jpg",
+      "page": 7
+    },
+    {
+      "id": "gra_3",
+      "name": "Coin Black",
+      "category": "Granite",
+      "image": "/images/products/coin_black.jpg",
+      "page": 7
+    },
+    {
+      "id": "gra_4",
+      "name": "Classic Pink",
+      "category": "Granite",
+      "image": "/images/products/classic_pink.jpg",
+      "page": 7
+    },
+    {
+      "id": "gra_5",
+      "name": "Classic Paradiso",
+      "category": "Granite",
+      "image": "/images/products/classic_paradiso.jpg",
+      "page": 7
+    },
+    {
+      "id": "gra_6",
+      "name": "Bhama Ivory",
+      "category": "Granite",
+      "image": "/images/products/bhama_ivory.jpg",
+      "page": 7
+    },
+    {
+      "id": "gra_7",
+      "name": "Lakha Red",
+      "category": "Granite",
+      "image": "/images/products/lakha_red.jpg",
+      "page": 7
+    },
+    {
+      "id": "gra_8",
+      "name": "Crystal Yellow",
+      "category": "Granite",
+      "image": "/images/products/crystal_yellow.jpg",
+      "page": 7
+    },
+    {
+      "id": "gra_9",
+      "name": "Coffee Brown",
+      "category": "Granite",
+      "image": "/images/products/coffee_brown.jpg",
+      "page": 7
+    },
+    {
+      "id": "gra_10",
+      "name": "Chima Pink",
+      "category": "Granite",
+      "image": "/images/products/chima_pink.jpg",
+      "page": 7
+    },
+    {
+      "id": "gra_11",
+      "name": "Bash Paradiso",
+      "category": "Granite",
+      "image": "/images/products/bash_paradiso.jpg",
+      "page": 7
+    },
+    {
+      "id": "gra_12",
+      "name": "Bala Flower",
+      "category": "Granite",
+      "image": "/images/products/bala_flower.jpg",
+      "page": 7
+    },
+    {
+      "id": "gra_1",
+      "name": "Black Pearl",
+      "category": "Granite",
+      "image": "/images/products/black_pearl.jpg",
+      "page": 8
+    },
+    {
+      "id": "gra_2",
+      "name": "Adhunik Brown",
+      "category": "Granite",
+      "image": "/images/products/adhunik_brown.jpg",
+      "page": 8
+    },
+    {
+      "id": "gra_3",
+      "name": "Sapphire Blue",
+      "category": "Granite",
+      "image": "/images/products/sapphire_blue.jpg",
+      "page": 8
+    },
+    {
+      "id": "gra_4",
+      "name": "Fish Black",
+      "category": "Granite",
+      "image": "/images/products/fish_black.jpg",
+      "page": 8
+    },
+    {
+      "id": "gra_5",
+      "name": "Khalda Red",
+      "category": "Granite",
+      "image": "/images/products/khalda_red.jpg",
+      "page": 8
+    },
+    {
+      "id": "gra_6",
+      "name": "Colombo Juparana",
+      "category": "Granite",
+      "image": "/images/products/colombo_juparana.jpg",
+      "page": 8
+    },
+    {
+      "id": "gra_7",
+      "name": "Ivory Chiffon",
+      "category": "Granite",
+      "image": "/images/products/ivory_chiffon.jpg",
+      "page": 8
+    },
+    {
+      "id": "gra_8",
+      "name": "Titanium Black",
+      "category": "Granite",
+      "image": "/images/products/titanium_black.jpg",
+      "page": 8
+    },
+    {
+      "id": "gra_9",
+      "name": "Shiva Gold",
+      "category": "Granite",
+      "image": "/images/products/shiva_gold.jpg",
+      "page": 8
+    },
+    {
+      "id": "gra_10",
+      "name": "Royal Pink",
+      "category": "Granite",
+      "image": "/images/products/royal_pink.jpg",
+      "page": 8
+    },
+    {
+      "id": "gra_11",
+      "name": "Rosewood",
+      "category": "Granite",
+      "image": "/images/products/rosewood.jpg",
+      "page": 8
+    },
+    {
+      "id": "gra_12",
+      "name": "Bhama Gold",
+      "category": "Granite",
+      "image": "/images/products/bhama_gold.jpg",
+      "page": 8
+    }
+  ],
+  "Rough Blocks": [
+    {
+      "id": "rou_1",
+      "name": "Viscon White Block",
+      "category": "Rough Blocks",
+      "image": "/images/products/viscon_white_block.jpg",
+      "page": 10
+    },
+    {
+      "id": "rou_2",
+      "name": "Tan Brown Block",
+      "category": "Rough Blocks",
+      "image": "/images/products/tan_brown_block.jpg",
+      "page": 10
+    },
+    {
+      "id": "rou_3",
+      "name": "Absolute Black Block",
+      "category": "Rough Blocks",
+      "image": "/images/products/absolute_black_block.jpg",
+      "page": 10
+    },
+    {
+      "id": "rou_4",
+      "name": "Black Galaxy Block",
+      "category": "Rough Blocks",
+      "image": "/images/products/black_galaxy_block.jpg",
+      "page": 10
+    },
+    {
+      "id": "rou_5",
+      "name": "Kuppam Green Block",
+      "category": "Rough Blocks",
+      "image": "/images/products/kuppam_green_block.jpg",
+      "page": 10
+    },
+    {
+      "id": "rou_6",
+      "name": "P White Block",
+      "category": "Rough Blocks",
+      "image": "/images/products/p_white_block.jpg",
+      "page": 10
+    }
+  ],
+  "Quartzite Series": [
+    {
+      "id": "qua_1",
+      "name": "Patagonia Eclipse",
+      "category": "Quartzite",
+      "image": "/images/products/patagonia_eclipse.jpg",
+      "page": 12
+    },
+    {
+      "id": "qua_2",
+      "name": "Snow Crest",
+      "category": "Quartzite",
+      "image": "/images/products/snow_crest.jpg",
+      "page": 12
+    },
+    {
+      "id": "qua_3",
+      "name": "Versailles Crystal",
+      "category": "Quartzite",
+      "image": "/images/products/versailles_crystal.jpg",
+      "page": 12
+    },
+    {
+      "id": "qua_4",
+      "name": "Verde Veria",
+      "category": "Quartzite",
+      "image": "/images/products/verde_veria.jpg",
+      "page": 12
+    },
+    {
+      "id": "qua_5",
+      "name": "Cosmopolitan Ivory",
+      "category": "Quartzite",
+      "image": "/images/products/cosmopolitan_ivory.jpg",
+      "page": 12
+    },
+    {
+      "id": "qua_6",
+      "name": "Rustic Blue",
+      "category": "Quartzite",
+      "image": "/images/products/rustic_blue.jpg",
+      "page": 12
+    },
+    {
+      "id": "qua_7",
+      "name": "Patagonia Golden Angel",
+      "category": "Quartzite",
+      "image": "/images/products/patagonia_golden_angel.jpg",
+      "page": 12
+    },
+    {
+      "id": "qua_8",
+      "name": "Glacier Storm",
+      "category": "Quartzite",
+      "image": "/images/products/glacier_storm.jpg",
+      "page": 12
+    },
+    {
+      "id": "qua_1",
+      "name": "Moon Mist",
+      "category": "Quartzite",
+      "image": "/images/products/moon_mist.jpg",
+      "page": 13
+    },
+    {
+      "id": "qua_2",
+      "name": "Emerald Tempest",
+      "category": "Quartzite",
+      "image": "/images/products/emerald_tempest.jpg",
+      "page": 13
+    },
+    {
+      "id": "qua_3",
+      "name": "Frozen Eclipse",
+      "category": "Quartzite",
+      "image": "/images/products/frozen_eclipse.jpg",
+      "page": 13
+    },
+    {
+      "id": "qua_4",
+      "name": "Blue Canyon",
+      "category": "Quartzite",
+      "image": "/images/products/blue_canyon.jpg",
+      "page": 13
+    },
+    {
+      "id": "qua_5",
+      "name": "Mystic Jungle",
+      "category": "Quartzite",
+      "image": "/images/products/mystic_jungle.jpg",
+      "page": 13
+    },
+    {
+      "id": "qua_6",
+      "name": "Arctic Stream",
+      "category": "Quartzite",
+      "image": "/images/products/arctic_stream.jpg",
+      "page": 13
+    },
+    {
+      "id": "qua_7",
+      "name": "P Grey Wild",
+      "category": "Quartzite",
+      "image": "/images/products/p_grey_wild.jpg",
+      "page": 13
+    },
+    {
+      "id": "qua_8",
+      "name": "P Grey",
+      "category": "Quartzite",
+      "image": "/images/products/p_grey.jpg",
+      "page": 13
+    },
+    {
+      "id": "qua_1",
+      "name": "Patagonia Arctic",
+      "category": "Quartzite",
+      "image": "/images/products/patagonia_arctic.jpg",
+      "page": 14
+    },
+    {
+      "id": "qua_2",
+      "name": "Mont Crown",
+      "category": "Quartzite",
+      "image": "/images/products/mont_crown.jpg",
+      "page": 14
+    },
+    {
+      "id": "qua_3",
+      "name": "Crystallo White",
+      "category": "Quartzite",
+      "image": "/images/products/crystallo_white.jpg",
+      "page": 14
+    },
+    {
+      "id": "qua_4",
+      "name": "Patagonia Exotic",
+      "category": "Quartzite",
+      "image": "/images/products/patagonia_exotic.jpg",
+      "page": 14
+    },
+    {
+      "id": "qua_5",
+      "name": "Patagonia Royale",
+      "category": "Quartzite",
+      "image": "/images/products/patagonia_royale.jpg",
+      "page": 14
+    },
+    {
+      "id": "qua_6",
+      "name": "Verde Imperial",
+      "category": "Quartzite",
+      "image": "/images/products/verde_imperial.jpg",
+      "page": 14
+    },
+    {
+      "id": "qua_7",
+      "name": "Noir",
+      "category": "Quartzite",
+      "image": "/images/products/noir.jpg",
+      "page": 14
+    },
+    {
+      "id": "qua_8",
+      "name": "Aurora Pink",
+      "category": "Quartzite",
+      "image": "/images/products/aurora_pink.jpg",
+      "page": 14
+    },
+    {
+      "id": "qua_1",
+      "name": "Desert Vein",
+      "category": "Quartzite",
+      "image": "/images/products/desert_vein.jpg",
+      "page": 15
+    },
+    {
+      "id": "qua_2",
+      "name": "Cristallo Arctic",
+      "category": "Quartzite",
+      "image": "/images/products/cristallo_arctic.jpg",
+      "page": 15
+    },
+    {
+      "id": "qua_3",
+      "name": "Taj Mahal Ivory",
+      "category": "Quartzite",
+      "image": "/images/products/taj_mahal_ivory.jpg",
+      "page": 15
+    },
+    {
+      "id": "qua_4",
+      "name": "Desert Lagoon",
+      "category": "Quartzite",
+      "image": "/images/products/desert_lagoon.jpg",
+      "page": 15
+    },
+    {
+      "id": "qua_5",
+      "name": "Patagonia Glacier Crest",
+      "category": "Quartzite",
+      "image": "/images/products/patagonia_glacier_crest.jpg",
+      "page": 15
+    },
+    {
+      "id": "qua_6",
+      "name": "Cristallo Pearl",
+      "category": "Quartzite",
+      "image": "/images/products/cristallo_pearl.jpg",
+      "page": 15
+    },
+    {
+      "id": "qua_7",
+      "name": "Midnight Majesty",
+      "category": "Quartzite",
+      "image": "/images/products/midnight_majesty.jpg",
+      "page": 15
+    },
+    {
+      "id": "qua_8",
+      "name": "Copper Lagoon",
+      "category": "Quartzite",
+      "image": "/images/products/copper_lagoon.jpg",
+      "page": 15
+    },
+    {
+      "id": "qua_1",
+      "name": "Imperial Gold Quartzite",
+      "category": "Quartzite",
+      "image": "/images/products/imperial_gold_quartzite.jpg",
+      "page": 16
+    },
+    {
+      "id": "qua_2",
+      "name": "Volcano",
+      "category": "Quartzite",
+      "image": "/images/products/volcano.jpg",
+      "page": 16
+    },
+    {
+      "id": "qua_3",
+      "name": "Taj Mahal Ivory Light",
+      "category": "Quartzite",
+      "image": "/images/products/taj_mahal_ivory_light.jpg",
+      "page": 16
+    },
+    {
+      "id": "qua_4",
+      "name": "Desert Lagoon Mist",
+      "category": "Quartzite",
+      "image": "/images/products/desert_lagoon_mist.jpg",
+      "page": 16
+    },
+    {
+      "id": "qua_5",
+      "name": "Cristallo Oro",
+      "category": "Quartzite",
+      "image": "/images/products/cristallo_oro.jpg",
+      "page": 16
+    },
+    {
+      "id": "qua_6",
+      "name": "Blue Canyon Wave",
+      "category": "Quartzite",
+      "image": "/images/products/blue_canyon_wave.jpg",
+      "page": 16
+    },
+    {
+      "id": "qua_7",
+      "name": "Phantom Wow",
+      "category": "Quartzite",
+      "image": "/images/products/phantom_wow.jpg",
+      "page": 16
+    },
+    {
+      "id": "qua_8",
+      "name": "Patagonia Polar",
+      "category": "Quartzite",
+      "image": "/images/products/patagonia_polar.jpg",
+      "page": 16
+    },
+    {
+      "id": "qua_1",
+      "name": "Patagonia Prime",
+      "category": "Quartzite",
+      "image": "/images/products/patagonia_prime.jpg",
+      "page": 25
+    },
+    {
+      "id": "qua_2",
+      "name": "Cristallo Classic",
+      "category": "Quartzite",
+      "image": "/images/products/cristallo_classic.jpg",
+      "page": 25
+    },
+    {
+      "id": "qua_3",
+      "name": "Cosmopolitan Gold",
+      "category": "Quartzite",
+      "image": "/images/products/cosmopolitan_gold.jpg",
+      "page": 25
+    },
+    {
+      "id": "qua_4",
+      "name": "Cosmopolitan Blue",
+      "category": "Quartzite",
+      "image": "/images/products/cosmopolitan_blue.jpg",
+      "page": 25
+    },
+    {
+      "id": "qua_5",
+      "name": "Patagonia Silver",
+      "category": "Quartzite",
+      "image": "/images/products/patagonia_silver.jpg",
+      "page": 25
+    },
+    {
+      "id": "qua_6",
+      "name": "Cristallo Gold",
+      "category": "Quartzite",
+      "image": "/images/products/cristallo_gold.jpg",
+      "page": 25
+    },
+    {
+      "id": "qua_7",
+      "name": "P-Pink",
+      "category": "Quartzite",
+      "image": "/images/products/p_pink.jpg",
+      "page": 25
+    },
+    {
+      "id": "qua_8",
+      "name": "Z-Green",
+      "category": "Quartzite",
+      "image": "/images/products/z_green.jpg",
+      "page": 25
+    }
+  ],
+  "Sandstone Series": [
+    {
+      "id": "san_1",
+      "name": "Teakwood",
+      "category": "Sandstone",
+      "image": "/images/products/teakwood.jpg",
+      "page": 21
+    },
+    {
+      "id": "san_2",
+      "name": "Kandla Grey",
+      "category": "Sandstone",
+      "image": "/images/products/kandla_grey.jpg",
+      "page": 21
+    },
+    {
+      "id": "san_3",
+      "name": "Red Mandana",
+      "category": "Sandstone",
+      "image": "/images/products/red_mandana.jpg",
+      "page": 21
+    },
+    {
+      "id": "san_4",
+      "name": "Agra Red",
+      "category": "Sandstone",
+      "image": "/images/products/agra_red.jpg",
+      "page": 21
+    },
+    {
+      "id": "san_5",
+      "name": "Autumn Brown",
+      "category": "Sandstone",
+      "image": "/images/products/autumn_brown.jpg",
+      "page": 21
+    },
+    {
+      "id": "san_6",
+      "name": "Rainbow",
+      "category": "Sandstone",
+      "image": "/images/products/rainbow.jpg",
+      "page": 21
+    },
+    {
+      "id": "san_7",
+      "name": "Dholpur Beige",
+      "category": "Sandstone",
+      "image": "/images/products/dholpur_beige.jpg",
+      "page": 21
+    },
+    {
+      "id": "san_8",
+      "name": "Jaisalmer Yellow Sandstone",
+      "category": "Sandstone",
+      "image": "/images/products/jaisalmer_yellow_sandstone.jpg",
+      "page": 21
+    },
+    {
+      "id": "san_1",
+      "name": "Jodhpur Pink",
+      "category": "Sandstone",
+      "image": "/images/products/jodhpur_pink.jpg",
+      "page": 22
+    },
+    {
+      "id": "san_2",
+      "name": "Flowery Gold",
+      "category": "Sandstone",
+      "image": "/images/products/flowery_gold.jpg",
+      "page": 22
+    },
+    {
+      "id": "san_3",
+      "name": "Mint White",
+      "category": "Sandstone",
+      "image": "/images/products/mint_white.jpg",
+      "page": 22
+    },
+    {
+      "id": "san_4",
+      "name": "Raj Green",
+      "category": "Sandstone",
+      "image": "/images/products/raj_green.jpg",
+      "page": 22
+    },
+    {
+      "id": "san_5",
+      "name": "Lalitpur Yellow",
+      "category": "Sandstone",
+      "image": "/images/products/lalitpur_yellow.jpg",
+      "page": 22
+    },
+    {
+      "id": "san_6",
+      "name": "Rippon Buff",
+      "category": "Sandstone",
+      "image": "/images/products/rippon_buff.jpg",
+      "page": 22
+    },
+    {
+      "id": "san_7",
+      "name": "Modak",
+      "category": "Sandstone",
+      "image": "/images/products/modak.jpg",
+      "page": 22
+    },
+    {
+      "id": "san_8",
+      "name": "Sagar Black Sandstone",
+      "category": "Sandstone",
+      "image": "/images/products/sagar_black_sandstone.jpg",
+      "page": 22
+    }
+  ],
+  "Slate Stone": [
+    {
+      "id": "sla_1",
+      "name": "Indian Autumn Slate",
+      "category": "Slate Stone",
+      "image": "/images/products/indian_autumn_slate.jpg",
+      "page": 24
+    },
+    {
+      "id": "sla_2",
+      "name": "Copper Slate",
+      "category": "Slate Stone",
+      "image": "/images/products/copper_slate.jpg",
+      "page": 24
+    },
+    {
+      "id": "sla_3",
+      "name": "Kund Multi",
+      "category": "Slate Stone",
+      "image": "/images/products/kund_multi.jpg",
+      "page": 24
+    },
+    {
+      "id": "sla_4",
+      "name": "California Gold",
+      "category": "Slate Stone",
+      "image": "/images/products/california_gold.jpg",
+      "page": 24
+    },
+    {
+      "id": "sla_5",
+      "name": "Deoli Green Slate",
+      "category": "Slate Stone",
+      "image": "/images/products/deoli_green_slate.jpg",
+      "page": 24
+    },
+    {
+      "id": "sla_6",
+      "name": "Silver Shine",
+      "category": "Slate Stone",
+      "image": "/images/products/silver_shine.jpg",
+      "page": 24
+    },
+    {
+      "id": "sla_7",
+      "name": "Peacock Multi Color",
+      "category": "Slate Stone",
+      "image": "/images/products/peacock_multi_color.jpg",
+      "page": 24
+    },
+    {
+      "id": "sla_8",
+      "name": "Jack Black",
+      "category": "Slate Stone",
+      "image": "/images/products/jack_black.jpg",
+      "page": 24
+    }
+  ],
+  "Stone Veneer": [
+    {
+      "id": "sto_1",
+      "name": "Copper Veneer",
+      "category": "Stone Veneer",
+      "image": "/images/products/copper_veneer.jpg",
+      "page": 27
+    },
+    {
+      "id": "sto_2",
+      "name": "Deoli Green Veneer",
+      "category": "Stone Veneer",
+      "image": "/images/products/deoli_green_veneer.jpg",
+      "page": 27
+    },
+    {
+      "id": "sto_3",
+      "name": "California Gold Veneer",
+      "category": "Stone Veneer",
+      "image": "/images/products/california_gold_veneer.jpg",
+      "page": 27
+    },
+    {
+      "id": "sto_4",
+      "name": "Silver Shine Veneer",
+      "category": "Stone Veneer",
+      "image": "/images/products/silver_shine_veneer.jpg",
+      "page": 27
+    },
+    {
+      "id": "sto_5",
+      "name": "Indian Autumn Veneer",
+      "category": "Stone Veneer",
+      "image": "/images/products/indian_autumn_veneer.jpg",
+      "page": 27
+    },
+    {
+      "id": "sto_6",
+      "name": "Forest Fire Veneer",
+      "category": "Stone Veneer",
+      "image": "/images/products/forest_fire_veneer.jpg",
+      "page": 27
+    },
+    {
+      "id": "sto_7",
+      "name": "Ocean Green Veneer",
+      "category": "Stone Veneer",
+      "image": "/images/products/ocean_green_veneer.jpg",
+      "page": 27
+    },
+    {
+      "id": "sto_8",
+      "name": "Multi Pink Veneer",
+      "category": "Stone Veneer",
+      "image": "/images/products/multi_pink_veneer.jpg",
+      "page": 27
+    },
+    {
+      "id": "sto_1",
+      "name": "Translucent Terra Red",
+      "category": "Stone Veneer",
+      "image": "/images/products/translucent_terra_red.jpg",
+      "page": 28
+    },
+    {
+      "id": "sto_2",
+      "name": "Translucent Indian Autumn",
+      "category": "Stone Veneer",
+      "image": "/images/products/translucent_indian_autumn.jpg",
+      "page": 28
+    },
+    {
+      "id": "sto_3",
+      "name": "Translucent Multi Color",
+      "category": "Stone Veneer",
+      "image": "/images/products/translucent_multi_color.jpg",
+      "page": 28
+    },
+    {
+      "id": "sto_4",
+      "name": "Translucent Copper",
+      "category": "Stone Veneer",
+      "image": "/images/products/translucent_copper.jpg",
+      "page": 28
+    },
+    {
+      "id": "sto_5",
+      "name": "Translucent Rustic",
+      "category": "Stone Veneer",
+      "image": "/images/products/translucent_rustic.jpg",
+      "page": 28
+    },
+    {
+      "id": "sto_6",
+      "name": "Translucent Black",
+      "category": "Stone Veneer",
+      "image": "/images/products/translucent_black.jpg",
+      "page": 28
+    },
+    {
+      "id": "sto_7",
+      "name": "Translucent Burning Forest",
+      "category": "Stone Veneer",
+      "image": "/images/products/translucent_burning_forest.jpg",
+      "page": 28
+    }
+  ],
+  "Limestone Series": [
+    {
+      "id": "lim_1",
+      "name": "Kadappa Black",
+      "category": "Limestone",
+      "image": "/images/products/kadappa_black.jpg",
+      "page": 32
+    },
+    {
+      "id": "lim_4",
+      "name": "Tandur Yellow",
+      "category": "Limestone",
+      "image": "/images/products/tandur_yellow.jpg",
+      "page": 32
+    },
+    {
+      "id": "lim_5",
+      "name": "Tandur Blue",
+      "category": "Limestone",
+      "image": "/images/products/tandur_blue.jpg",
+      "page": 32
+    },
+    {
+      "id": "lim_6",
+      "name": "Tandur Grey",
+      "category": "Limestone",
+      "image": "/images/products/tandur_grey.jpg",
+      "page": 32
+    },
+    {
+      "id": "lim_7",
+      "name": "Jaisalmer Yellow Limestone",
+      "category": "Limestone",
+      "image": "/images/products/jaisalmer_yellow_limestone.jpg",
+      "page": 32
+    }
+  ],
+  "Landscaping & Furniture": [
+    {
+      "id": "lan_1",
+      "name": "Stone Circle Multi",
+      "category": "Landscaping",
+      "image": "/images/products/stone_circle_multi.jpg",
+      "page": 37
+    },
+    {
+      "id": "lan_2",
+      "name": "Stone Circle Grey",
+      "category": "Landscaping",
+      "image": "/images/products/stone_circle_grey.jpg",
+      "page": 37
+    },
+    {
+      "id": "lan_3",
+      "name": "Stepping Stones Organic",
+      "category": "Landscaping",
+      "image": "/images/products/stepping_stones_organic.jpg",
+      "page": 37
+    },
+    {
+      "id": "lan_4",
+      "name": "Stepping Stones Natural Walkway",
+      "category": "Landscaping",
+      "image": "/images/products/stepping_stones_natural_walkway.jpg",
+      "page": 37
+    },
+    {
+      "id": "lan_5",
+      "name": "Pool Coping Bullnose",
+      "category": "Landscaping",
+      "image": "/images/products/pool_coping_bullnose.jpg",
+      "page": 37
+    },
+    {
+      "id": "lan_6",
+      "name": "Pool Coping Drop Face",
+      "category": "Landscaping",
+      "image": "/images/products/pool_coping_drop_face.jpg",
+      "page": 37
+    },
+    {
+      "id": "lan_1",
+      "name": "Natural River Pebbles",
+      "category": "Landscaping",
+      "image": "/images/products/natural_river_pebbles.jpg",
+      "page": 38
+    },
+    {
+      "id": "lan_2",
+      "name": "Rainbow Tumbled Pebbles",
+      "category": "Landscaping",
+      "image": "/images/products/rainbow_tumbled_pebbles.jpg",
+      "page": 38
+    },
+    {
+      "id": "lan_3",
+      "name": "Granite Cobbles & Setts",
+      "category": "Landscaping",
+      "image": "/images/products/granite_cobbles_and_setts.jpg",
+      "page": 38
+    },
+    {
+      "id": "lan_4",
+      "name": "Cobbles Radial Paving",
+      "category": "Landscaping",
+      "image": "/images/products/cobbles_radial_paving.jpg",
+      "page": 38
+    },
+    {
+      "id": "lan_5",
+      "name": "Hand Cut Stone Setts",
+      "category": "Landscaping",
+      "image": "/images/products/hand_cut_stone_setts.jpg",
+      "page": 38
+    },
+    {
+      "id": "lan_6",
+      "name": "Natural Stone Flagstone Pavers",
+      "category": "Landscaping",
+      "image": "/images/products/natural_stone_flagstone_pavers.jpg",
+      "page": 38
+    },
+    {
+      "id": "lan_1",
+      "name": "White Fieldstone Cladding",
+      "category": "Landscaping",
+      "image": "/images/products/white_fieldstone_cladding.jpg",
+      "page": 39
+    },
+    {
+      "id": "lan_2",
+      "name": "Grey Fieldstone Walling",
+      "category": "Landscaping",
+      "image": "/images/products/grey_fieldstone_walling.jpg",
+      "page": 39
+    },
+    {
+      "id": "lan_3",
+      "name": "Dry Stone Walling Light",
+      "category": "Landscaping",
+      "image": "/images/products/dry_stone_walling_light.jpg",
+      "page": 39
+    },
+    {
+      "id": "lan_4",
+      "name": "Dry Stone Walling Earth",
+      "category": "Landscaping",
+      "image": "/images/products/dry_stone_walling_earth.jpg",
+      "page": 39
+    },
+    {
+      "id": "lan_5",
+      "name": "Smooth Sawn Paving",
+      "category": "Landscaping",
+      "image": "/images/products/smooth_sawn_paving.jpg",
+      "page": 39
+    },
+    {
+      "id": "lan_6",
+      "name": "Riven Sandstone Paving",
+      "category": "Landscaping",
+      "image": "/images/products/riven_sandstone_paving.jpg",
+      "page": 39
+    },
+    {
+      "id": "fur_1",
+      "name": "Steps & Risers Bullnose",
+      "category": "Furniture",
+      "image": "/images/products/steps_and_risers_bullnose.jpg",
+      "page": 40
+    },
+    {
+      "id": "fur_2",
+      "name": "Steps & Risers Flamed",
+      "category": "Furniture",
+      "image": "/images/products/steps_and_risers_flamed.jpg",
+      "page": 40
+    },
+    {
+      "id": "fur_3",
+      "name": "Carved Stone Bench Rose",
+      "category": "Furniture",
+      "image": "/images/products/carved_stone_bench_rose.jpg",
+      "page": 40
+    },
+    {
+      "id": "fur_4",
+      "name": "Contemporary Curved Bench",
+      "category": "Furniture",
+      "image": "/images/products/contemporary_curved_bench.jpg",
+      "page": 40
+    },
+    {
+      "id": "fur_5",
+      "name": "Outdoor Stone Dining Set",
+      "category": "Furniture",
+      "image": "/images/products/outdoor_stone_dining_set.jpg",
+      "page": 40
+    },
+    {
+      "id": "fur_6",
+      "name": "Round Solid Stone Table",
+      "category": "Furniture",
+      "image": "/images/products/round_solid_stone_table.jpg",
+      "page": 40
+    },
+    {
+      "id": "art_1",
+      "name": "Marble Stone Idols & Statues",
+      "category": "Articles",
+      "image": "/images/products/marble_stone_idols_and_statues.jpg",
+      "page": 41
+    },
+    {
+      "id": "art_2",
+      "name": "Illuminated Stone Spheres",
+      "category": "Articles",
+      "image": "/images/products/illuminated_stone_spheres.jpg",
+      "page": 41
+    },
+    {
+      "id": "art_3",
+      "name": "Multi-Tier Classical Stone Fountain",
+      "category": "Articles",
+      "image": "/images/products/multi_tier_classical_stone_fountain.jpg",
+      "page": 41
+    },
+    {
+      "id": "art_4",
+      "name": "Contemporary Stone Pots & Planters",
+      "category": "Articles",
+      "image": "/images/products/contemporary_stone_pots_and_planters.jpg",
+      "page": 41
+    },
+    {
+      "id": "art_5",
+      "name": "Modern Abstract Stone Sculpture",
+      "category": "Articles",
+      "image": "/images/products/modern_abstract_stone_sculpture.jpg",
+      "page": 41
+    },
+    {
+      "id": "art_6",
+      "name": "Traditional Handcrafted Stone Lanterns",
+      "category": "Articles",
+      "image": "/images/products/traditional_handcrafted_stone_lanterns.jpg",
+      "page": 41
+    }
+  ],
+  "Marble Series": [
+    {
+      "id": "mar_1",
+      "name": "Statuario Indian",
+      "category": "Marble",
+      "image": "/images/products/statuario_indian.jpg",
+      "page": 18
+    },
+    {
+      "id": "mar_2",
+      "name": "Mercury Black",
+      "category": "Marble",
+      "image": "/images/products/mercury_black.jpg",
+      "page": 18
+    },
+    {
+      "id": "mar_3",
+      "name": "Fantasy Brown Marble",
+      "category": "Marble",
+      "image": "/images/products/fantasy_brown_marble.jpg",
+      "page": 18
+    },
+    {
+      "id": "mar_4",
+      "name": "Rainforest Brown",
+      "category": "Marble",
+      "image": "/images/products/rainforest_brown.jpg",
+      "page": 18
+    },
+    {
+      "id": "mar_5",
+      "name": "Rainforest Gold",
+      "category": "Marble",
+      "image": "/images/products/rainforest_gold.jpg",
+      "page": 18
+    },
+    {
+      "id": "mar_6",
+      "name": "Rainforest Green",
+      "category": "Marble",
+      "image": "/images/products/rainforest_green.jpg",
+      "page": 18
+    },
+    {
+      "id": "mar_7",
+      "name": "Agaria White",
+      "category": "Marble",
+      "image": "/images/products/agaria_white.jpg",
+      "page": 18
+    },
+    {
+      "id": "mar_8",
+      "name": "Albeta White",
+      "category": "Marble",
+      "image": "/images/products/albeta_white.jpg",
+      "page": 18
+    },
+    {
+      "id": "mar_9",
+      "name": "Ambaji White",
+      "category": "Marble",
+      "image": "/images/products/ambaji_white.jpg",
+      "page": 18
+    },
+    {
+      "id": "mar_10",
+      "name": "Banswara White",
+      "category": "Marble",
+      "image": "/images/products/banswara_white.jpg",
+      "page": 18
+    },
+    {
+      "id": "mar_11",
+      "name": "Indian Marquina",
+      "category": "Marble",
+      "image": "/images/products/indian_marquina.jpg",
+      "page": 18
+    },
+    {
+      "id": "mar_12",
+      "name": "Indian Green",
+      "category": "Marble",
+      "image": "/images/products/indian_green.jpg",
+      "page": 18
+    },
+    {
+      "id": "mar_13",
+      "name": "Jaisalmer Yellow Marble",
+      "category": "Marble",
+      "image": "/images/products/jaisalmer_yellow_marble.jpg",
+      "page": 19
+    },
+    {
+      "id": "mar_14",
+      "name": "Katni Beige",
+      "category": "Marble",
+      "image": "/images/products/katni_beige.jpg",
+      "page": 19
+    },
+    {
+      "id": "mar_15",
+      "name": "Makrana White",
+      "category": "Marble",
+      "image": "/images/products/makrana_white.jpg",
+      "page": 19
+    },
+    {
+      "id": "mar_16",
+      "name": "Morwad White",
+      "category": "Marble",
+      "image": "/images/products/morwad_white.jpg",
+      "page": 19
+    },
+    {
+      "id": "mar_17",
+      "name": "White Onyx",
+      "category": "Marble",
+      "image": "/images/products/white_onyx.jpg",
+      "page": 19
+    },
+    {
+      "id": "mar_18",
+      "name": "Indian Panda White",
+      "category": "Marble",
+      "image": "/images/products/indian_panda_white.jpg",
+      "page": 19
+    },
+    {
+      "id": "mar_19",
+      "name": "Makrana Kumari",
+      "category": "Marble",
+      "image": "/images/products/makrana_kumari.jpg",
+      "page": 19
+    },
+    {
+      "id": "mar_20",
+      "name": "Bhaislana Black",
+      "category": "Marble",
+      "image": "/images/products/bhaislana_black.jpg",
+      "page": 19
+    },
+    {
+      "id": "mar_21",
+      "name": "Ita Gold",
+      "category": "Marble",
+      "image": "/images/products/ita_gold.jpg",
+      "page": 19
+    },
+    {
+      "id": "mar_22",
+      "name": "Fantasy Grey",
+      "category": "Marble",
+      "image": "/images/products/fantasy_grey.jpg",
+      "page": 19
+    },
+    {
+      "id": "mar_23",
+      "name": "Banswara Purple",
+      "category": "Marble",
+      "image": "/images/products/banswara_purple.jpg",
+      "page": 19
+    },
+    {
+      "id": "mar_24",
+      "name": "Carbon Black",
+      "category": "Marble",
+      "image": "/images/products/carbon_black.jpg",
+      "page": 19
+    }
+  ]
+}
