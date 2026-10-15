@@ -5,6 +5,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { initDatabase } from './database.js';
+import { connectMongoDB } from './mongodb.js';
 import { seedInitialData } from './seed.js';
 import authRoutes from './routes/authRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
@@ -18,8 +19,9 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Initialize Database & Run Automatic Migration / Seeding
+// Initialize SQLite & MongoDB Connections
 initDatabase();
+connectMongoDB();
 seedInitialData();
 
 // Middleware: Non-wildcard CORS supporting credentials and deployed frontend

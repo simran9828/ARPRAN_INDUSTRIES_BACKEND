@@ -12,19 +12,14 @@ const router = express.Router();
 
 /**
  * POST /api/admin/login
- * Admin Login: Authenticates strictly against database `admins` table.
+ * Admin Login: Authenticates against MongoDB User collection (admin role)
  */
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '127.0.0.1';
 
-    const cleanEmail = String(email || '').trim().toLowerCase();
-    const existingAdmin = db.prepare('SELECT id, email, password_changed, default_password_used FROM admins WHERE email = ?').get(cleanEmail);
-
-    console.log(`[Diagnostic Login] Email: ${cleanEmail} | Exists: ${Boolean(existingAdmin)} | password_changed: ${existingAdmin?.password_changed ?? 'N/A'} | DB: ${dbPath}`);
-
-    const result = authenticateAdminFromDB(email, password);
+    const result = await authenticateAdminFromDB(email, password);
 
     if (!result.success) {
       logActivity(email || 'unknown', 'Failed Admin Login Attempt', `Reason: ${result.error}`, ip);
@@ -34,11 +29,11 @@ router.post('/login', (req, res) => {
       });
     }
 
-    logActivity(result.admin.email, 'Admin Login', 'Logged in via Database credentials', ip);
+    logActivity(result.admin.email, 'Admin Login', 'Logged in via MongoDB credentials', ip);
 
     return res.json({
       success: true,
-      message: 'Logged in successfully from database.',
+      message: 'Logged in successfully from MongoDB.',
       token: result.token,
       admin: result.admin
     });
@@ -63,9 +58,9 @@ router.get('/me', requireAdmin, (req, res) => {
 
 /**
  * POST /api/admin/change-password
- * Updates password directly in database `admins` table after verifying current password.
+ * Updates password directly in MongoDB after verifying current password.
  */
-router.post('/change-password', requireAdmin, (req, res) => {
+router.post('/change-password', requireAdmin, async (req, res) => {
   try {
     const { oldPassword, newPassword } = req.body;
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '127.0.0.1';
@@ -73,18 +68,19 @@ router.post('/change-password', requireAdmin, (req, res) => {
     if (!oldPassword || !newPassword) {
       return res.status(400).json({
         success: false,
-        error: 'Current password aur new password dono required hain.'
+        error: 'Current password and new password are both required.'
       });
     }
 
     if (String(newPassword).trim().length < 6) {
       return res.status(400).json({
         success: false,
-        error: 'New password kam se kam 6 characters ka hona chahiye.'
+        error: 'New password must be at least 6 characters in length.'
       });
     }
 
-    const result = updateAdminPasswordInDB(req.admin.id, oldPassword, newPassword);
+    const adminId = req.admin.id || req.admin._id;
+    const result = await updateAdminPasswordInDB(adminId, oldPassword, newPassword);
 
     if (!result.success) {
       return res.status(400).json({
@@ -93,11 +89,11 @@ router.post('/change-password', requireAdmin, (req, res) => {
       });
     }
 
-    logActivity(req.admin.email, 'Admin Password Changed', 'Password updated in database table `admins`', ip);
+    logActivity(req.admin.email, 'Admin Password Changed', 'Password updated in MongoDB', ip);
 
     return res.json({
       success: true,
-      message: 'Admin password successfully updated in database!'
+      message: 'Admin password successfully updated in MongoDB!'
     });
   } catch (err) {
     return res.status(500).json({
@@ -109,9 +105,9 @@ router.post('/change-password', requireAdmin, (req, res) => {
 
 /**
  * POST /api/admin/update-email
- * Updates admin email directly in database `admins` table
+ * Updates admin email directly in MongoDB
  */
-router.post('/update-email', requireAdmin, (req, res) => {
+router.post('/update-email', requireAdmin, async (req, res) => {
   try {
     const { newEmail, name } = req.body;
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '127.0.0.1';
@@ -123,7 +119,8 @@ router.post('/update-email', requireAdmin, (req, res) => {
       });
     }
 
-    const result = updateAdminEmailInDB(req.admin.id, newEmail, name);
+    const adminId = req.admin.id || req.admin._id;
+    const result = await updateAdminEmailInDB(adminId, newEmail, name);
 
     if (!result.success) {
       return res.status(400).json({
@@ -132,16 +129,12 @@ router.post('/update-email', requireAdmin, (req, res) => {
       });
     }
 
-    logActivity(newEmail, 'Admin Email Updated', `Changed from ${req.admin.email} to ${newEmail} in database`, ip);
+    logActivity(req.admin.email, 'Admin Email Updated', `Email changed to ${newEmail} in MongoDB`, ip);
 
     return res.json({
       success: true,
-      message: 'Admin email successfully updated in database!',
-      admin: {
-        ...req.admin,
-        email: result.email,
-        name: name || req.admin.name
-      }
+      message: 'Admin email updated successfully in MongoDB!',
+      email: result.email
     });
   } catch (err) {
     return res.status(500).json({
@@ -149,16 +142,6 @@ router.post('/update-email', requireAdmin, (req, res) => {
       error: 'Email update error: ' + err.message
     });
   }
-});
-
-/**
- * POST /api/admin/logout
- */
-router.post('/logout', (req, res) => {
-  return res.json({
-    success: true,
-    message: 'Logged out successfully.'
-  });
 });
 
 export default router;

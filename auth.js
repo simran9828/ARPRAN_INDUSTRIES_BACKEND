@@ -1,8 +1,10 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import db from './database.js';
+import User from './models/User.js';
+import { connectMongoDB } from './mongodb.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'arpran_super_secure_jwt_secret_key_2026';
+const JWT_SECRET = process.env.JWT_SECRET || 'arpran_production_grade_jwt_secret_key_9823472918347';
 
 /**
  * Generate a signed JWT token
@@ -24,9 +26,9 @@ export function verifyToken(token) {
 
 /**
  * Middleware: requireAdmin
- * Strictly verifies JWT and validates admin directly against SQLite database `admins` or `users` table.
+ * Strictly verifies JWT and validates admin directly against MongoDB (with SQLite fallback)
  */
-export function requireAdmin(req, res, next) {
+export async function requireAdmin(req, res, next) {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({
@@ -46,24 +48,118 @@ export function requireAdmin(req, res, next) {
   }
 
   try {
-    const admin = db.prepare('SELECT id, email, name, role FROM admins WHERE id = ?').get(decoded.id) ||
-                  db.prepare('SELECT id, email, name, role FROM admins WHERE email = ?').get(decoded.email?.toLowerCase().trim()) ||
-                  db.prepare("SELECT id, email, name, role FROM users WHERE id = ? AND (role = 'admin' OR role = 'superadmin')").get(decoded.id);
+    await connectMongoDB();
+    let admin = null;
+
+    // 1. Check in MongoDB
+    if (decoded.id) {
+      try {
+        admin = await User.findById(decoded.id).select('-password_hash');
+      } catch (e) {}
+    }
+    if (!admin && decoded.email) {
+      admin = await User.findOne({ 
+        email: decoded.email.toLowerCase().trim() 
+      }).select('-password_hash');
+    }
+
+    // 2. Fallback check in SQLite if not yet migrated
+    if (!admin) {
+      const sqliteAdmin = db.prepare('SELECT id, email, name, role FROM admins WHERE id = ?').get(decoded.id) ||
+                          db.prepare('SELECT id, email, name, role FROM admins WHERE email = ?').get(decoded.email?.toLowerCase().trim()) ||
+                          db.prepare("SELECT id, email, name, role FROM users WHERE id = ? AND (role = 'admin' OR role = 'superadmin')").get(decoded.id);
+      if (sqliteAdmin) {
+        admin = sqliteAdmin;
+      }
+    }
 
     if (!admin) {
       return res.status(403).json({
         success: false,
-        error: 'Access denied. Admin record not found in database.'
+        error: 'Access denied. Administrator record not found.'
       });
     }
 
-    req.admin = admin;
-    req.user = admin;
+    const role = admin.role || 'user';
+    if (role !== 'admin' && role !== 'superadmin') {
+      return res.status(403).json({
+        success: false,
+        error: 'Access denied. Administrator privileges required.'
+      });
+    }
+
+    const safeAdmin = admin.toSafeObject ? admin.toSafeObject() : admin;
+    req.admin = safeAdmin;
+    req.user = safeAdmin;
     next();
   } catch (err) {
     return res.status(500).json({
       success: false,
       error: 'Database error verifying admin credentials: ' + err.message
+    });
+  }
+}
+
+/**
+ * Middleware: requireUser
+ * Verifies JWT for customer or admin user sessions against MongoDB
+ */
+export async function requireUser(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({
+      success: false,
+      error: 'Authentication required. No token provided.'
+    });
+  }
+
+  const token = authHeader.split(' ')[1];
+  const decoded = verifyToken(token);
+
+  if (!decoded) {
+    return res.status(401).json({
+      success: false,
+      error: 'Session expired or invalid token. Please log in again.'
+    });
+  }
+
+  try {
+    await connectMongoDB();
+    let user = null;
+
+    // 1. Check in MongoDB
+    if (decoded.id) {
+      try {
+        user = await User.findById(decoded.id).select('-password_hash');
+      } catch (e) {}
+    }
+    if (!user && decoded.email) {
+      user = await User.findOne({ email: decoded.email.toLowerCase().trim() }).select('-password_hash');
+    }
+
+    // 2. Fallback check in SQLite
+    if (!user) {
+      const sqliteUser = db.prepare('SELECT id, email, name, role, phone, company FROM users WHERE id = ?').get(decoded.id) ||
+                         db.prepare('SELECT id, email, name, role FROM admins WHERE id = ?').get(decoded.id) ||
+                         db.prepare('SELECT id, email, name, role, phone, company FROM users WHERE email = ?').get(decoded.email?.toLowerCase().trim());
+      if (sqliteUser) {
+        user = sqliteUser;
+      }
+    }
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        error: 'User account not found.'
+      });
+    }
+
+    req.user = user.toSafeObject ? user.toSafeObject() : user;
+    next();
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: 'Database error verifying session: ' + err.message
     });
   }
 }
@@ -83,11 +179,10 @@ export function logActivity(email, action, details = '', ip = '127.0.0.1') {
 }
 
 /**
- * Authenticate admin directly from the database `admins` table.
- * Strictly verifies against bcrypt password hash stored in SQLite database.
- * No hardcoded default passwords.
+ * Authenticate admin directly from MongoDB.
+ * Strictly verifies against bcrypt password hash stored in MongoDB.
  */
-export function authenticateAdminFromDB(email, password) {
+export async function authenticateAdminFromDB(email, password) {
   const cleanEmail = String(email || '').trim().toLowerCase();
   const cleanPassword = String(password || '').trim();
 
@@ -95,123 +190,176 @@ export function authenticateAdminFromDB(email, password) {
     return { success: false, error: 'Email and password are required.' };
   }
 
-  // 1. Query admin record from database `admins` table
-  let admin = db.prepare(`
-    SELECT id, email, password_hash, name, role
-    FROM admins 
-    WHERE email = ?
-  `).get(cleanEmail);
+  try {
+    await connectMongoDB();
 
-  // If not found in admins table, also check users table with admin/superadmin role
-  if (!admin) {
-    const userAdmin = db.prepare(`
-      SELECT id, email, password_hash, name, role
-      FROM users
-      WHERE email = ? AND (role = 'admin' OR role = 'superadmin')
-    `).get(cleanEmail);
-    if (userAdmin) {
-      admin = userAdmin;
+    // 1. Query MongoDB for admin account
+    let admin = await User.findOne({
+      email: cleanEmail,
+      role: { $in: ['admin', 'superadmin'] }
+    });
+
+    // 2. Fallback: check SQLite admins table and auto-sync to MongoDB
+    if (!admin) {
+      const sqliteAdmin = db.prepare('SELECT id, email, password_hash, name, role FROM admins WHERE email = ?').get(cleanEmail);
+      if (sqliteAdmin) {
+        const isSqliteMatch = bcrypt.compareSync(cleanPassword, sqliteAdmin.password_hash);
+        if (isSqliteMatch) {
+          try {
+            admin = await User.findOneAndUpdate(
+              { email: cleanEmail },
+              {
+                email: cleanEmail,
+                password_hash: sqliteAdmin.password_hash,
+                name: sqliteAdmin.name || 'Admin',
+                role: 'admin'
+              },
+              { upsert: true, new: true }
+            );
+          } catch (migErr) {
+            console.warn('Auto-sync SQLite admin to MongoDB error:', migErr.message);
+          }
+
+          const token = generateToken({
+            id: admin ? admin._id.toString() : sqliteAdmin.id,
+            email: sqliteAdmin.email,
+            name: sqliteAdmin.name || 'Admin',
+            role: sqliteAdmin.role || 'superadmin'
+          });
+
+          return {
+            success: true,
+            token,
+            admin: admin ? admin.toSafeObject() : sqliteAdmin
+          };
+        }
+      }
     }
-  }
 
-  if (!admin) {
-    return { success: false, error: 'Admin account not found in database. Please sign up or verify email.' };
-  }
+    if (!admin) {
+      return { success: false, error: 'Administrator account not found in database. Please sign up or verify email.' };
+    }
 
-  // 2. Compare password strictly with database password_hash
-  const isMatch = bcrypt.compareSync(cleanPassword, admin.password_hash);
+    // 3. Verify password hash using bcrypt
+    const isMatch = bcrypt.compareSync(cleanPassword, admin.password_hash);
+    if (!isMatch) {
+      return { success: false, error: 'Invalid password. Credentials do not match database record.' };
+    }
 
-  if (!isMatch) {
-    return { success: false, error: 'Invalid password. Credentials do not match database record.' };
-  }
-
-  // 3. Issue JWT token
-  const token = generateToken({
-    id: admin.id,
-    email: admin.email,
-    name: admin.name || 'Admin',
-    role: admin.role || 'superadmin'
-  });
-
-  return {
-    success: true,
-    token,
-    admin: {
-      id: admin.id,
+    // 4. Issue JWT token
+    const token = generateToken({
+      id: admin._id.toString(),
       email: admin.email,
       name: admin.name || 'Admin',
       role: admin.role || 'superadmin'
+    });
+
+    return {
+      success: true,
+      token,
+      admin: admin.toSafeObject()
+    };
+  } catch (err) {
+    return { success: false, error: 'Database authentication error: ' + err.message };
+  }
+}
+
+/**
+ * Update admin password in MongoDB
+ */
+export async function updateAdminPasswordInDB(adminId, oldPassword, newPassword) {
+  try {
+    await connectMongoDB();
+    let admin = null;
+    try {
+      admin = await User.findById(adminId);
+    } catch (e) {}
+    if (!admin) {
+      admin = await User.findOne({ email: adminId });
     }
-  };
-}
 
-/**
- * Update admin password in database.
- * No passwords stored in .env. Permanently locks default passwords.
- */
-export function updateAdminPasswordInDB(adminId, oldPassword, newPassword) {
-  // 1. Fetch current admin from DB
-  const admin = db.prepare('SELECT id, email, password_hash FROM admins WHERE id = ?').get(adminId);
-  if (!admin) {
+    if (admin) {
+      const isMatch = bcrypt.compareSync(String(oldPassword).trim(), admin.password_hash);
+      if (!isMatch) {
+        return { success: false, error: 'Current (old) password is incorrect in database.' };
+      }
+      const newHash = bcrypt.hashSync(String(newPassword).trim(), 10);
+      admin.password_hash = newHash;
+      await admin.save();
+
+      // Mirror in SQLite
+      try {
+        db.prepare('UPDATE admins SET password_hash = ?, updated_at = CURRENT_TIMESTAMP WHERE email = ?').run(newHash, admin.email);
+      } catch (e) {}
+
+      return {
+        success: true,
+        message: 'Admin password successfully updated in MongoDB!'
+      };
+    }
+
+    // SQLite fallback
+    const sqliteAdmin = db.prepare('SELECT id, email, password_hash FROM admins WHERE id = ?').get(adminId);
+    if (sqliteAdmin) {
+      const isMatch = bcrypt.compareSync(String(oldPassword).trim(), sqliteAdmin.password_hash);
+      if (!isMatch) {
+        return { success: false, error: 'Current (old) password is incorrect in database.' };
+      }
+      const newHash = bcrypt.hashSync(String(newPassword).trim(), 10);
+      db.prepare('UPDATE admins SET password_hash = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?').run(newHash, sqliteAdmin.id);
+      return {
+        success: true,
+        message: 'Admin password successfully updated in database!'
+      };
+    }
+
     return { success: false, error: 'Admin account not found in database.' };
+  } catch (err) {
+    return { success: false, error: err.message };
   }
-
-  // 2. Verify old password strictly against database password_hash
-  const isMatch = bcrypt.compareSync(String(oldPassword).trim(), admin.password_hash);
-  if (!isMatch) {
-    return { success: false, error: 'Current (old) password is incorrect in database.' };
-  }
-
-  // 3. Hash new password and update database record with permanent lock on default password
-  const newHash = bcrypt.hashSync(String(newPassword).trim(), 10);
-  
-  db.prepare(`
-    UPDATE admins
-    SET password_hash = ?, 
-        previous_password_hash = ?, 
-        password_changed = 1,
-        default_password_used = 1,
-        updated_at = CURRENT_TIMESTAMP
-    WHERE id = ?
-  `).run(newHash, admin.password_hash, admin.id);
-
-  return {
-    success: true,
-    message: 'Admin password successfully updated in database!'
-  };
 }
 
 /**
- * Update admin email in database
+ * Update admin email in MongoDB
  */
-export function updateAdminEmailInDB(adminId, newEmail, newName = null) {
+export async function updateAdminEmailInDB(adminId, newEmail, newName = null) {
   const cleanEmail = String(newEmail).trim().toLowerCase();
+  try {
+    await connectMongoDB();
+    const existing = await User.findOne({ email: cleanEmail, _id: { $ne: adminId } });
+    if (existing) {
+      return { success: false, error: 'This email is already registered to another account.' };
+    }
 
-  // Check if new email is already used by another admin in DB
-  const existing = db.prepare('SELECT id FROM admins WHERE email = ? AND id != ?').get(cleanEmail, adminId);
-  if (existing) {
-    return { success: false, error: 'This email is already registered to another admin in database.' };
+    let admin = null;
+    try {
+      admin = await User.findById(adminId);
+    } catch (e) {}
+    if (!admin) {
+      admin = await User.findOne({ email: adminId });
+    }
+
+    if (admin) {
+      admin.email = cleanEmail;
+      if (newName) admin.name = newName;
+      await admin.save();
+
+      // Mirror in SQLite
+      try {
+        db.prepare('UPDATE admins SET email = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?').run(cleanEmail, adminId);
+      } catch (e) {}
+
+      return {
+        success: true,
+        message: 'Admin email successfully updated in MongoDB!',
+        email: cleanEmail
+      };
+    }
+
+    return { success: false, error: 'Admin account not found in database.' };
+  } catch (err) {
+    return { success: false, error: err.message };
   }
-
-  if (newName) {
-    db.prepare(`
-      UPDATE admins
-      SET email = ?, name = ?, updated_at = CURRENT_TIMESTAMP
-      WHERE id = ?
-    `).run(cleanEmail, newName, adminId);
-  } else {
-    db.prepare(`
-      UPDATE admins
-      SET email = ?, updated_at = CURRENT_TIMESTAMP
-      WHERE id = ?
-    `).run(cleanEmail, adminId);
-  }
-
-  return {
-    success: true,
-    message: 'Admin email successfully updated in database!',
-    email: cleanEmail
-  };
 }
 
 // In-memory rate limiting map: IP -> { attempts: number, lockUntil: number }
@@ -219,9 +367,6 @@ const loginAttempts = new Map();
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_MS = 15 * 60 * 1000; // 15 minutes lockout
 
-/**
- * Rate limiting check for authentication attempts
- */
 export function checkLoginRateLimit(ip) {
   const record = loginAttempts.get(ip);
   if (!record) return { allowed: true };
@@ -235,7 +380,6 @@ export function checkLoginRateLimit(ip) {
     };
   }
 
-  // If lockout expired, reset
   if (record.lockUntil && record.lockUntil <= now) {
     loginAttempts.delete(ip);
     return { allowed: true };
@@ -244,9 +388,6 @@ export function checkLoginRateLimit(ip) {
   return { allowed: true };
 }
 
-/**
- * Record a failed login attempt for an IP
- */
 export function recordFailedLogin(ip) {
   const now = Date.now();
   const record = loginAttempts.get(ip) || { attempts: 0, lockUntil: 0 };
@@ -259,55 +400,6 @@ export function recordFailedLogin(ip) {
   loginAttempts.set(ip, record);
 }
 
-/**
- * Reset failed login attempts on successful login
- */
 export function resetLoginAttempts(ip) {
   loginAttempts.delete(ip);
 }
-
-/**
- * Middleware: requireUser
- * Verifies JWT for customer or admin user sessions
- */
-export function requireUser(req, res, next) {
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({
-      success: false,
-      error: 'Authentication required. No token provided.'
-    });
-  }
-
-  const token = authHeader.split(' ')[1];
-  const decoded = verifyToken(token);
-
-  if (!decoded) {
-    return res.status(401).json({
-      success: false,
-      error: 'Session expired or invalid token. Please log in again.'
-    });
-  }
-
-  try {
-    const user = db.prepare('SELECT id, email, name, role FROM users WHERE id = ?').get(decoded.id) ||
-                 db.prepare('SELECT id, email, name, role FROM admins WHERE id = ?').get(decoded.id) ||
-                 db.prepare('SELECT id, email, name, role FROM admins WHERE email = ?').get(decoded.email?.toLowerCase().trim());
-
-    if (!user) {
-      return res.status(401).json({
-        success: false,
-        error: 'User account not found.'
-      });
-    }
-
-    req.user = user;
-    next();
-  } catch (err) {
-    return res.status(500).json({
-      success: false,
-      error: 'Database error verifying session: ' + err.message
-    });
-  }
-}
-
