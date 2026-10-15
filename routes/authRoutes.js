@@ -1,4 +1,5 @@
 import express from 'express';
+import db, { dbPath } from '../database.js';
 import {
   authenticateAdminFromDB,
   updateAdminPasswordInDB,
@@ -17,6 +18,11 @@ router.post('/login', (req, res) => {
   try {
     const { email, password } = req.body;
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '127.0.0.1';
+
+    const cleanEmail = String(email || '').trim().toLowerCase();
+    const existingAdmin = db.prepare('SELECT id, email, password_changed, default_password_used FROM admins WHERE email = ?').get(cleanEmail);
+
+    console.log(`[Diagnostic Login] Email: ${cleanEmail} | Exists: ${Boolean(existingAdmin)} | password_changed: ${existingAdmin?.password_changed ?? 'N/A'} | DB: ${dbPath}`);
 
     const result = authenticateAdminFromDB(email, password);
 

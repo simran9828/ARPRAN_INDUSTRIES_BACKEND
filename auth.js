@@ -4,9 +4,6 @@ import db from './database.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'arpran_super_secure_jwt_secret_key_2026';
 
-// Known initial default passwords that can only be used ONCE (checked here directly, not from .env)
-export const DEFAULT_PASSWORDS = ['ArpranAdmin2026!', 'Arpran@#4321'];
-
 /**
  * Generate a signed JWT token
  */
@@ -27,7 +24,7 @@ export function verifyToken(token) {
 
 /**
  * Middleware: requireAdmin
- * Strictly verifies JWT and validates admin directly against SQLite database `admins` table.
+ * Strictly verifies JWT and validates admin directly against SQLite database `admins` or `users` table.
  */
 export function requireAdmin(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -50,7 +47,8 @@ export function requireAdmin(req, res, next) {
 
   try {
     const admin = db.prepare('SELECT id, email, name, role FROM admins WHERE id = ?').get(decoded.id) ||
-                  db.prepare('SELECT id, email, name, role FROM admins WHERE email = ?').get(decoded.email?.toLowerCase().trim());
+                  db.prepare('SELECT id, email, name, role FROM admins WHERE email = ?').get(decoded.email?.toLowerCase().trim()) ||
+                  db.prepare("SELECT id, email, name, role FROM users WHERE id = ? AND (role = 'admin' OR role = 'superadmin')").get(decoded.id);
 
     if (!admin) {
       return res.status(403).json({
@@ -86,9 +84,8 @@ export function logActivity(email, action, details = '', ip = '127.0.0.1') {
 
 /**
  * Authenticate admin directly from the database `admins` table.
- * Enforces rule: Default passwords from DEFAULT_PASSWORDS array can only be used ONCE.
- * After password is changed, default password is permanently disabled.
- * Zero reliance on .env for passwords.
+ * Strictly verifies against bcrypt password hash stored in SQLite database.
+ * No hardcoded default passwords.
  */
 export function authenticateAdminFromDB(email, password) {
   const cleanEmail = String(email || '').trim().toLowerCase();
@@ -98,33 +95,27 @@ export function authenticateAdminFromDB(email, password) {
     return { success: false, error: 'Email and password are required.' };
   }
 
-  // 1. Query admin record strictly from database `admins` table
-  const admin = db.prepare(`
-    SELECT id, email, password_hash, name, role, default_password_used, password_changed 
+  // 1. Query admin record from database `admins` table
+  let admin = db.prepare(`
+    SELECT id, email, password_hash, name, role
     FROM admins 
     WHERE email = ?
   `).get(cleanEmail);
 
+  // If not found in admins table, also check users table with admin/superadmin role
   if (!admin) {
-    return { success: false, error: 'Admin account not found in database.' };
+    const userAdmin = db.prepare(`
+      SELECT id, email, password_hash, name, role
+      FROM users
+      WHERE email = ? AND (role = 'admin' OR role = 'superadmin')
+    `).get(cleanEmail);
+    if (userAdmin) {
+      admin = userAdmin;
+    }
   }
 
-  const isDefaultPasswordAttempt = DEFAULT_PASSWORDS.includes(cleanPassword);
-
-  // Rule 1: If password was already updated in DB, default passwords are permanently disabled
-  if (isDefaultPasswordAttempt && admin.password_changed === 1) {
-    return {
-      success: false,
-      error: 'Default password is permanently disabled because your password has been changed. Please use your new password.'
-    };
-  }
-
-  // Rule 2: If default password was already used once, block further use
-  if (isDefaultPasswordAttempt && admin.default_password_used >= 1) {
-    return {
-      success: false,
-      error: 'Default password can only be used once. Please use your updated password.'
-    };
+  if (!admin) {
+    return { success: false, error: 'Admin account not found in database. Please sign up or verify email.' };
   }
 
   // 2. Compare password strictly with database password_hash
@@ -134,16 +125,7 @@ export function authenticateAdminFromDB(email, password) {
     return { success: false, error: 'Invalid password. Credentials do not match database record.' };
   }
 
-  // 3. If successfully logged in with default password for the first time, mark it as used
-  if (isDefaultPasswordAttempt) {
-    try {
-      db.prepare('UPDATE admins SET default_password_used = 1 WHERE id = ?').run(admin.id);
-    } catch (e) {
-      console.warn('Could not update default_password_used flag:', e.message);
-    }
-  }
-
-  // 4. Issue JWT token
+  // 3. Issue JWT token
   const token = generateToken({
     id: admin.id,
     email: admin.email,

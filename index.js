@@ -22,11 +22,38 @@ const PORT = process.env.PORT || 5000;
 initDatabase();
 seedInitialData();
 
-// Middleware
-const allowedOrigins = process.env.CORS_ORIGIN || process.env.CLIENT_URL;
+// Middleware: Non-wildcard CORS supporting credentials and deployed frontend
+const defaultAllowedOrigins = [
+  'https://arpran-industries-frontend.onrender.com',
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://127.0.0.1:5173'
+];
+
+const envOrigins = (process.env.CORS_ORIGIN || process.env.CLIENT_URL || '')
+  .split(',')
+  .map(s => s.trim())
+  .filter(s => s && s !== '*'); // Disallow wildcard when credentials are used
+
+const allowedOrigins = Array.from(new Set([...defaultAllowedOrigins, ...envOrigins]));
+
 app.use(cors({
-  origin: allowedOrigins ? allowedOrigins.split(',').map(s => s.trim()) : true,
-  credentials: true
+  origin: (origin, callback) => {
+    // Allow non-browser requests (e.g. curl, server-to-server) where origin is undefined
+    if (!origin) return callback(null, true);
+
+    const cleanOrigin = origin.replace(/\/+$/, '');
+    const isAllowed = allowedOrigins.some(o => o.replace(/\/+$/, '') === cleanOrigin);
+
+    if (isAllowed) {
+      return callback(null, true);
+    }
+    return callback(null, false);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  optionsSuccessStatus: 204
 }));
 app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));

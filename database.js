@@ -284,8 +284,22 @@ export function initDatabase() {
   try { db.exec("ALTER TABLE admins ADD COLUMN previous_password_hash TEXT;"); } catch (e) {}
   try { db.exec("ALTER TABLE admins ADD COLUMN default_password_used INTEGER DEFAULT 0;"); } catch (e) {}
   try { db.exec("ALTER TABLE admins ADD COLUMN password_changed INTEGER DEFAULT 0;"); } catch (e) {}
+  try { db.exec("ALTER TABLE users ADD COLUMN phone TEXT;"); } catch (e) {}
+  try { db.exec("ALTER TABLE users ADD COLUMN company TEXT;"); } catch (e) {}
+  try { db.exec("ALTER TABLE admins ADD COLUMN phone TEXT;"); } catch (e) {}
 
   console.log('✓ SQLite Database tables verified and initialized.');
+  console.log(`[Diagnostic] Database file path: ${dbPath}`);
+  try {
+    const adminRows = db.prepare('SELECT email, password_changed, default_password_used FROM admins').all();
+    console.log(`[Diagnostic] Registered admin accounts count: ${adminRows.length}`);
+    for (const a of adminRows) {
+      console.log(`[Diagnostic] Account: ${a.email} | password_changed: ${a.password_changed} | default_password_used: ${a.default_password_used}`);
+    }
+  } catch (err) {
+    console.warn('[Diagnostic] Could not query admin table diagnostic:', err.message);
+  }
 }
 
+export { dbPath };
 export default db;

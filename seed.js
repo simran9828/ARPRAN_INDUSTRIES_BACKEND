@@ -11,19 +11,8 @@ const __dirname = path.dirname(__filename);
 export function seedInitialData() {
   console.log('--- Checking & Seeding CMS Initial Data ---');
 
-  // 1. Initial Admin Account Bootstrapping - ONLY on first-ever initialization if table is empty
-  const adminsCount = db.prepare('SELECT COUNT(*) as count FROM admins').get().count;
-  if (adminsCount === 0) {
-    const defaultEmail = 'arpransales@gmail.com';
-    const defaultPassword = 'ArpranAdmin2026!';
-    const hashedPassword = bcrypt.hashSync(defaultPassword, 10);
-
-    db.prepare(`
-      INSERT INTO admins (email, password_hash, name, role)
-      VALUES (?, ?, ?, ?)
-    `).run(defaultEmail, hashedPassword, 'Super Admin', 'superadmin');
-    console.log(`✓ Initial Admin Account provisioned for: ${defaultEmail}`);
-  }
+  // 1. Admin accounts are managed dynamically through DB Signup / Registration (No hardcoded credentials)
+  console.log('✓ Admin accounts configured via SQLite DB registration.');
 
   // 2. Site Settings Seed
   const siteSettingsCount = db.prepare('SELECT COUNT(*) as count FROM site_settings').get().count;
