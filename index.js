@@ -29,7 +29,8 @@ const defaultAllowedOrigins = [
   'https://arpran-industries-frontend.onrender.com',
   'http://localhost:5173',
   'http://localhost:3000',
-  'http://127.0.0.1:5173'
+  'http://127.0.0.1:5173',
+  'https://arpran-industries.onrender.com',
 ];
 
 const envOrigins = (process.env.CORS_ORIGIN || process.env.CLIENT_URL || '')
