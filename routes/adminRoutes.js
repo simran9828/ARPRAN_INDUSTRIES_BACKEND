@@ -713,9 +713,21 @@ router.post('/blogs', (req, res) => {
   const blogSlug = (slug || title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   const blogDate = date || new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   const blogReadTime = read_time || '5 min read';
-  const jsonSections = JSON.stringify(Array.isArray(sections) ? sections : []);
-  const jsonPoints = JSON.stringify(Array.isArray(key_points) ? key_points : []);
-  const jsonFaqs = JSON.stringify(Array.isArray(faqs) ? faqs : []);
+  const safeJsonField = (val) => {
+    if (typeof val === 'string') {
+      try {
+        JSON.parse(val);
+        return val;
+      } catch (e) {
+        return JSON.stringify([]);
+      }
+    }
+    return JSON.stringify(Array.isArray(val) ? val : []);
+  };
+
+  const jsonSections = safeJsonField(sections);
+  const jsonPoints = safeJsonField(key_points);
+  const jsonFaqs = safeJsonField(faqs);
 
   try {
     const result = db.prepare(`
@@ -758,9 +770,21 @@ router.put('/blogs/:id', (req, res) => {
 
   const existing = db.prepare('SELECT slug FROM blogs WHERE id = ?').get(id);
   const blogSlug = (slug || existing?.slug || title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-  const jsonSections = JSON.stringify(Array.isArray(sections) ? sections : []);
-  const jsonPoints = JSON.stringify(Array.isArray(key_points) ? key_points : []);
-  const jsonFaqs = JSON.stringify(Array.isArray(faqs) ? faqs : []);
+  const safeJsonField = (val) => {
+    if (typeof val === 'string') {
+      try {
+        JSON.parse(val);
+        return val;
+      } catch (e) {
+        return JSON.stringify([]);
+      }
+    }
+    return JSON.stringify(Array.isArray(val) ? val : []);
+  };
+
+  const jsonSections = safeJsonField(sections);
+  const jsonPoints = safeJsonField(key_points);
+  const jsonFaqs = safeJsonField(faqs);
 
   try {
     db.prepare(`
